@@ -232,8 +232,8 @@ import CuredAndDeadRateChart from '../components/CuredAndDeadRateChart'
 import CurrentConfirmedCompareBarChart from '../components/CurrentConfirmedCompareBarChart'
 import DataMap from '../components/DataMap'
 import ProvinceRankingBarChart from '../components/ProvinceRankingBarChart'
-import covid19Service from '../api/covid19'
 import {chinaProvinceData, parseCovidData} from '../utils/csvUtil'
+import dailyList from '../../public/covid19-daily-list.json';
 
 export default {
   components: {
@@ -329,16 +329,18 @@ export default {
       }
     },
     queryTrendDataList () {
-      let self = this
-      covid19Service.getDailyList().then((res) => {
-        if (!res.success) {
-          // TODO 错误处理...
-          console.log('错误:' + res.info)
-          return
-        }
-        // 重置图表数据
-        self.setTrendDataList(res.data)
-      })
+      dailyList.data
+      // let self = this
+      // covid19Service.getDailyList().then((res) => {
+      //   if (!res.success) {
+      //     // TODO 错误处理...
+      //     console.log('错误:' + res.info)
+      //     return
+      //   }
+      //   // 重置图表数据
+      //   self.setTrendDataList(res.data)
+      // })
+      this.setTrendDataList(dailyList.data)
     },
     setBasicData (data) {
       return {
